@@ -535,7 +535,7 @@ macro(build_faiss)
     if (KNOWHERE_GPU_VERSION)
         set(FAISS_CONFIGURE_ARGS ${FAISS_CONFIGURE_ARGS}
                 "--with-cuda=${CUDA_TOOLKIT_ROOT_DIR}"
-                "--with-cuda-arch=-gencode=arch=compute_60,code=sm_60 -gencode=arch=compute_61,code=sm_61 -gencode=arch=compute_70,code=sm_70 -gencode=arch=compute_75,code=sm_75"
+                "--with-cuda-arch=-gencode=arch=compute_60,code=sm_60 -gencode=arch=compute_61,code=sm_61 -gencode=arch=compute_70,code=sm_70 -gencode=arch=compute_75,code=sm_75 -gencode=arch=compute_80,code=sm_80 -gencode=arch=compute_86,code=sm_86"
                 )
     else ()
         set(FAISS_CONFIGURE_ARGS ${FAISS_CONFIGURE_ARGS}
@@ -595,6 +595,7 @@ macro(build_faiss)
             PROPERTIES
             IMPORTED_LOCATION "${FAISS_STATIC_LIB}"
             INTERFACE_INCLUDE_DIRECTORIES "${FAISS_INCLUDE_DIR}"
+            CXX_STANDARD 14
     )
     if (FAISS_WITH_MKL)
         set_target_properties(
